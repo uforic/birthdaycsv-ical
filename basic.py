@@ -17,7 +17,7 @@ def startCalendar(calId, version):
 
 def generateUuid(month, day, name):
 	moddedName = string.upper(string.replace(name, " ", ""))
-	return "BDAY-%s-%s-%s" % (month, day, moddedName)
+	return "BDAY-%s-%s-%s" % ("{0:02d}".format(month), "{0:02d}".format(day), moddedName)
 
 def decorateEvent(event):
 	event.add('CATEGORIES', 'Birthdays')
