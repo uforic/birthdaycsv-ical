@@ -19,11 +19,11 @@ def generateUuid(month, day, name):
 	moddedName = string.upper(string.replace(name, " ", ""))
 	return "BDAY-%s-%s-%s" % ("{0:02d}".format(month), "{0:02d}".format(day), moddedName)
 
-def decorateEvent(event):
+def decorateEvent(event, month):
 	event.add('CATEGORIES', 'Birthdays')
 	event.add('CLASS', 'PRIVATE')
 	event.add('TRANSP', 'TRANSPARENT')
-	event.add('RRULE:FREQ=YEARLY',"yearly")
+	event.add('RRULE:FREQ=YEARLY;BYMONTH=%s' % (month),"")
 
 def addEvent(cal, name, parsedDate):
 	currentYear = int(time.strftime("%Y"))
@@ -32,7 +32,7 @@ def addEvent(cal, name, parsedDate):
 	startDate = datetime.date(currentYear, dateMonth, dateDay)
 	eventName = "%s%s" % (name, "'s Birthday")
 	event = Event()
-	decorateEvent(event)
+	decorateEvent(event, dateMonth)
 	event.add('summary', eventName)
 	event.add('dtstart', startDate)
 	event.add('dtstamp', datetime.datetime.now())
